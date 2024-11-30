@@ -7,7 +7,7 @@ import QtGraphicalEffects 1.15
 Item{
     id: root
     Layout.fillWidth: true
-    Layout.preferredHeight: Math.max(64, label.height+24)
+    Layout.preferredHeight: Math.max(64, label.height+24)+12
 
     //Properties
     property int borderMargin: 12
@@ -25,8 +25,9 @@ Item{
     Rectangle{
         id: mainRect
         x: -width-borderMargin
+        y: 12
         width: parent.width
-        height: parent.height
+        height: parent.height-12
         color: "white"
         radius: 6
         layer.enabled: true
@@ -117,6 +118,13 @@ Item{
             target: mainRect
             property: "x"
             to: -mainRect.width-borderMargin
+            easing.type: "OutQuint"
+            duration: 500
+        }
+        NumberAnimation{
+            target: root
+            property: "Layout.preferredHeight"
+            to: 0
             easing.type: "OutQuint"
             duration: 500
         }

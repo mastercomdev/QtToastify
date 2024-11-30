@@ -10,11 +10,15 @@ Item {
     ColumnLayout{
         id: mainColumn
         x: 12
-        y: 12
         width: 300
+        spacing: 0
     }
 
     Component.onCompleted: {
+        createMessage()
+    }
+
+    function createMessage(){
         var component = Qt.createComponent("qrc:/qml/Toastify/ToastifyDelegate.qml")
         var dynamicRectangle = component.createObject(mainColumn);
     }

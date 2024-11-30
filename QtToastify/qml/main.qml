@@ -22,13 +22,17 @@ ApplicationWindow {
 
         Button{
             Layout.alignment: Qt.AlignHCenter
-            text: "Start"
+            text: "Create Message"
             highlighted: true
+
+            onClicked: {
+                toastify.createMessage()
+            }
         }
     }
 
     //Toast display module
     Toastify{
-
+        id: toastify
     }
 }

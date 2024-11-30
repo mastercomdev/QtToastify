@@ -34,7 +34,7 @@ int main(int argc, char *argv[])
     QFontDatabase::addApplicationFont(":/resources/fonts/Montserrat-ThinItalic.ttf");
 
     QQmlApplicationEngine engine;
-    const QUrl url(QStringLiteral("qrc:/main.qml"));
+    const QUrl url(QStringLiteral("qrc:/qml/main.qml"));
     QObject::connect(
         &engine,
         &QQmlApplicationEngine::objectCreated,

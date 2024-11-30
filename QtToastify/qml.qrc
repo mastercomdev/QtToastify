@@ -3,5 +3,6 @@
         <file>qml/main.qml</file>
         <file>qml/Toastify/Toastify.qml</file>
         <file>qml/Toastify/ToastifyDelegate.qml</file>
+        <file>qml/Toastify/README.md</file>
     </qresource>
 </RCC>

@@ -11,11 +11,18 @@ Item{
 
     //Properties
     property int borderMargin: 12
+    property int position: 0
+    readonly property int topLeft: 0
+    readonly property int topRight: 1
+    readonly property int bottomLeft: 2
+    readonly property int bottomRight: 3
 
     QtObject{
         id: privateProperty
 
         property real progress: 0
+        property real startPosX: position===topLeft ? -mainRect.width-borderMargin : position===topRight ? mainRect.width+12 : position===bottomLeft ? -mainRect.width-borderMargin : position===bottomRight ? mainRect.width+12 : -1
+        property real endPosX: 0
     }
 
     Component.onCompleted: {
@@ -24,7 +31,7 @@ Item{
 
     Rectangle{
         id: mainRect
-        x: -width-borderMargin
+        x: privateProperty.startPosX
         y: 12
         width: parent.width
         height: parent.height-12
@@ -92,7 +99,7 @@ Item{
         NumberAnimation{
             target: mainRect
             property: "x"
-            to: 0
+            to: privateProperty.endPosX
             //// Candidates for easing types
             // easing.type: "InOutExpo"
             // easing.type: "OutBounce"
@@ -117,7 +124,7 @@ Item{
         NumberAnimation{
             target: mainRect
             property: "x"
-            to: -mainRect.width-borderMargin
+            to: privateProperty.startPosX
             easing.type: "OutQuint"
             duration: 500
         }

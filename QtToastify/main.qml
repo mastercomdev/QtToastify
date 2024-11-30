@@ -25,4 +25,9 @@ ApplicationWindow {
             highlighted: true
         }
     }
+
+    //Toast display module
+    Toastify{
+
+    }
 }

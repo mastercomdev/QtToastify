@@ -18,5 +18,6 @@
         <file>resources/fonts/Montserrat-SemiBoldItalic.ttf</file>
         <file>resources/fonts/Montserrat-Thin.ttf</file>
         <file>resources/fonts/Montserrat-ThinItalic.ttf</file>
+        <file>resources/icons/info.svg</file>
     </qresource>
 </RCC>

@@ -22,12 +22,22 @@ Item {
         spacing: 0
     }
 
-    Component.onCompleted: {
-        createMessage()
-    }
+    function createMessage( message, options = {} ){
+        try{
+            if(!message){
+                throw new Error("Invalid message")
+            }
 
-    function createMessage(){
-        var component = Qt.createComponent("qrc:/qml/Toastify/ToastifyDelegate.qml")
-        var dynamicRectangle = component.createObject(mainColumn, {position});
+            const { clickAction } = options;
+            var component = Qt.createComponent("qrc:/qml/Toastify/ToastifyDelegate.qml")
+            var messageContainer = component.createObject(mainColumn, {
+                                                              message,
+                                                              clickAction
+                                                          });
+            return messageContainer;
+        }
+        catch(err){
+            console.error(err || "Failed to create toast")
+        }
     }
 }

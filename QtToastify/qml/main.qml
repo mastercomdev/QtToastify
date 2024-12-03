@@ -20,13 +20,36 @@ ApplicationWindow {
             font.pointSize: 24
         }
 
-        Button{
-            Layout.alignment: Qt.AlignHCenter
-            text: "Create Message"
-            highlighted: true
+        RowLayout{
+            spacing: 12
 
-            onClicked: {
-                toastify.createMessage()
+            Button{
+                Layout.alignment: Qt.AlignHCenter
+                text: "Create Message"
+                highlighted: true
+
+                onClicked: {
+                    //Simple
+                    toastify.createMessage("Simple message example")
+                }
+            }
+            Button{
+                Layout.alignment: Qt.AlignHCenter
+                text: "Custom click action"
+                highlighted: true
+
+                onClicked: {
+                    //With Click Action
+                    const customAction= function(messageContainer){
+                        console.log("Custom action!")
+                        messageContainer.close()
+                    }
+                    const options = {
+                        clickAction: customAction
+                    }
+
+                    toastify.createMessage("Custom click action message!", options)
+                }
             }
         }
     }

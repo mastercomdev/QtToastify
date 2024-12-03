@@ -11,12 +11,8 @@ Item{
 
     //Properties
     property int borderMargin: 12
-    property int position: 0
-    readonly property int topLeft: 0
-    readonly property int topRight: 1
-    readonly property int bottomLeft: 2
-    readonly property int bottomRight: 3
     property var clickAction
+    property string message: ""
 
     QtObject{
         id: privateProperty
@@ -69,7 +65,7 @@ Item{
                 Layout.rightMargin: 12
                 wrapMode: "WordWrap"
                 horizontalAlignment: "AlignLeft"
-                text: "Wow! so easy"
+                text: message
             }
         }
         Rectangle{
@@ -152,5 +148,10 @@ Item{
         ScriptAction{
             script: root.destroy()
         }
+    }
+
+    //Functions
+    function close(){
+        exitAnimation.start()
     }
 }

@@ -16,6 +16,7 @@ Item{
     readonly property int topRight: 1
     readonly property int bottomLeft: 2
     readonly property int bottomRight: 3
+    property var clickAction
 
     QtObject{
         id: privateProperty
@@ -85,6 +86,19 @@ Item{
                 radius: 2
                 anchors.bottom: parent.bottom
                 color: "#3498db"
+            }
+        }
+    }
+
+    MouseArea{
+        anchors.fill: parent
+
+        onClicked: {
+            try{
+                clickAction()
+            }catch(err){
+                toastAnimation.stop()
+                exitAnimation.start()
             }
         }
     }

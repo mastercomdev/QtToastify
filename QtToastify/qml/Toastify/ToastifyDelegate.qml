@@ -14,12 +14,13 @@ Item{
     property var clickAction
     property string message: ""
     property string type: "success"
+    property int position: Qt.TopLeftCorner
 
     QtObject{
         id: privateProperty
 
         property real progress: 0
-        property real startPosX: position===topLeft ? -mainRect.width-borderMargin : position===topRight ? mainRect.width+12 : position===bottomLeft ? -mainRect.width-borderMargin : position===bottomRight ? mainRect.width+12 : -1
+        property real startPosX: position===Qt.TopLeftCorner ? -mainRect.width-borderMargin : position===Qt.TopRightCorner ? mainRect.width+12 : position===Qt.BottomLeftCorner? -mainRect.width-borderMargin : position===Qt.BottomRightCorner ? mainRect.width+12 : -1
         property real endPosX: 0
         property color accent: type==="info" ?    "#3498db" :
                                type==="success" ? "#07bc0c" :

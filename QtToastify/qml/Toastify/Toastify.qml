@@ -7,17 +7,38 @@ Item {
     anchors.fill: parent
     parent: Overlay.overlay
 
-    //Properties
-    readonly property int topLeft: 0
-    readonly property int topRight: 1
-    readonly property int bottomLeft: 2
-    readonly property int bottomRight: 3
-    property int position: topLeft
-
+    //Top-Left
     ColumnLayout{
-        id: mainColumn
-        x: position===topLeft ? 12 : position===topRight ? root.width-width-12 : position===bottomLeft ? 12 : position===bottomRight ? root.width-width-12 : -1
-        y: position===topLeft ? 0 : position===topRight ? 0 : position===bottomLeft ? root.height-height-12 : position===bottomRight ? root.height-height-12 : -1
+        id: topLeftColumn
+        x: 12
+        y: 0
+        width: 300
+        spacing: 0
+    }
+
+    //Top-Right
+    ColumnLayout{
+        id: topRightColumn
+        x: root.width-width-12
+        y: 0
+        width: 300
+        spacing: 0
+    }
+
+    //Bottom-Left
+    ColumnLayout{
+        id: bottomLeftColumn
+        x: 12
+        y: root.height-height-12
+        width: 300
+        spacing: 0
+    }
+
+    //Bottom-Right
+    ColumnLayout{
+        id: bottomRightColumn
+        x: root.width-width-12
+        y: root.height-height-12
         width: 300
         spacing: 0
     }
@@ -28,10 +49,11 @@ Item {
                 throw new Error("Invalid message")
             }
 
-            const { type, clickAction } = options;
+            const { type, position, clickAction } = options;
             var component = Qt.createComponent("qrc:/qml/Toastify/ToastifyDelegate.qml")
-            var messageContainer = component.createObject(mainColumn, {
+            var messageContainer = component.createObject(determinePosition(position), {
                                                               message,
+                                                              position,
                                                               type,
                                                               clickAction
                                                           });
@@ -39,6 +61,21 @@ Item {
         }
         catch(err){
             console.error(err || "Failed to create toast")
+        }
+    }
+
+    function determinePosition(position){
+        switch(position){
+        case Qt.TopLeftCorner:
+            return topLeftColumn;
+        case Qt.TopRightCorner:
+            return topRightColumn;
+        case Qt.BottomLeftCorner:
+            return bottomLeftColumn;
+        case Qt.BottomRightCorner:
+            return bottomRightColumn;
+        default:
+            console.log("Invalid position")
         }
     }
 }

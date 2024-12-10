@@ -15,6 +15,7 @@ ApplicationWindow {
 
     //Properties
     property string selectedType: "info"
+    property int selectedPosition: Qt.TopLeftCorner
 
     ColumnLayout{
         anchors.centerIn: parent
@@ -46,7 +47,6 @@ ApplicationWindow {
         }
         Flow{
             RadioButton {
-                id: infoCheckBox
                 text: "info"
                 ButtonGroup.group: toastTypeGroup
                 checked: selectedType==="info"
@@ -56,7 +56,6 @@ ApplicationWindow {
                 }
             }
             RadioButton {
-                id: successCheckBox
                 text: "success"
                 ButtonGroup.group: toastTypeGroup
                 checked: selectedType==="success"
@@ -66,7 +65,6 @@ ApplicationWindow {
                 }
             }
             RadioButton {
-                id: warningCheckBox
                 text: "warning"
                 ButtonGroup.group: toastTypeGroup
                 checked: selectedType==="warning"
@@ -76,13 +74,59 @@ ApplicationWindow {
                 }
             }
             RadioButton {
-                id: errorCheckBox
                 text: "error"
                 ButtonGroup.group: toastTypeGroup
                 checked: selectedType==="error"
 
                 onClicked: {
                     selectedType= "error"
+                }
+            }
+        }
+
+        Label{
+            text: "Position:"
+            font.weight: Font.DemiBold
+        }
+
+        ButtonGroup{
+            id: toastPositionGroup
+        }
+        Flow{
+            RadioButton {
+                text: "Top-Left"
+                ButtonGroup.group: toastPositionGroup
+                checked: selectedPosition===Qt.TopLeftCorner
+
+                onClicked: {
+                    selectedPosition= Qt.TopLeftCorner
+                }
+            }
+            RadioButton {
+                text: "Top-Right"
+                ButtonGroup.group: toastPositionGroup
+                checked: selectedPosition===Qt.TopRightCorner
+
+                onClicked: {
+                    selectedPosition= Qt.TopRightCorner
+                }
+            }
+            RadioButton {
+                text: "Bottom-Left"
+                ButtonGroup.group: toastPositionGroup
+                checked: selectedPosition===Qt.BottomLeftCorner
+
+                onClicked: {
+                    selectedPosition= Qt.BottomLeftCorner
+                }
+            }
+            RadioButton {
+                text: "Bottom-Right"
+                ButtonGroup.group: toastPositionGroup
+                checked: selectedPosition===Qt.BottomRightCorner
+
+                onClicked: {
+                    selectedPosition= Qt.BottomRightCorner
                 }
             }
         }
@@ -98,7 +142,7 @@ ApplicationWindow {
             Material.accent: Material.Indigo
 
             onClicked: {
-                toastify.createMessage(messageTextfield.text, {type: selectedType})
+                toastify.createMessage(messageTextfield.text, {type: selectedType, position: selectedPosition})
             }
         }
 
@@ -129,6 +173,5 @@ ApplicationWindow {
     //Toast display module
     Toastify{
         id: toastify
-        position: topLeft
     }
 }

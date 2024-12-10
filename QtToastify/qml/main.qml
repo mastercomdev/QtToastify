@@ -13,6 +13,9 @@ ApplicationWindow {
     font.family: "Montserrat"
     Material.accent: "#3498db"
 
+    //Properties
+    property string selectedType: "info"
+
     ColumnLayout{
         anchors.centerIn: parent
         spacing: 12
@@ -28,21 +31,51 @@ ApplicationWindow {
             text: "Simple message example"
         }
 
-        TextArea{
-            id: optionsTextarea
-            Layout.fillWidth: true
-            text: "{
+        ButtonGroup{
+            id: toastTypeGroup
+        }
+        Flow{
+            RadioButton {
+                id: infoCheckBox
+                text: "info"
+                ButtonGroup.group: toastTypeGroup
+                checked: selectedType==="info"
 
+                onClicked: {
+                    selectedType= "info"
+                }
+            }
+            RadioButton {
+                id: successCheckBox
+                text: "success"
+                ButtonGroup.group: toastTypeGroup
+                checked: selectedType==="success"
 
-}"
+                onClicked: {
+                    selectedType= "success"
+                }
+            }
+            RadioButton {
+                id: warningCheckBox
+                text: "warning"
+                ButtonGroup.group: toastTypeGroup
+                checked: selectedType==="warning"
 
-            MouseArea{
-                anchors.fill: parent
-                propagateComposedEvents: false
-                preventStealing: true
+                onClicked: {
+                    selectedType= "warning"
+                }
+            }
+            RadioButton {
+                id: errorCheckBox
+                text: "error"
+                ButtonGroup.group: toastTypeGroup
+                checked: selectedType==="error"
+
+                onClicked: {
+                    selectedType= "error"
+                }
             }
         }
-
 
         Button{
             text: "🚀 Show Toast"
@@ -50,7 +83,7 @@ ApplicationWindow {
             Material.accent: Material.Indigo
 
             onClicked: {
-                toastify.createMessage(messageTextfield.text)
+                toastify.createMessage(messageTextfield.text, {type: selectedType})
             }
         }
 

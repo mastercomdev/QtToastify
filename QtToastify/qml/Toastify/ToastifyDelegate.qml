@@ -13,6 +13,7 @@ Item{
     property int borderMargin: 12
     property var clickAction
     property string message: ""
+    property string type: "success"
 
     QtObject{
         id: privateProperty
@@ -20,6 +21,11 @@ Item{
         property real progress: 0
         property real startPosX: position===topLeft ? -mainRect.width-borderMargin : position===topRight ? mainRect.width+12 : position===bottomLeft ? -mainRect.width-borderMargin : position===bottomRight ? mainRect.width+12 : -1
         property real endPosX: 0
+        property color accent: type==="info" ?    "#3498db" :
+                               type==="success" ? "#07bc0c" :
+                               type==="warning" ? "#f1c40f" :
+                               type==="error" ?   "#e74c3c" :
+                                                  "#000000"
     }
 
     Component.onCompleted: {
@@ -56,7 +62,7 @@ Item{
                 sourceSize.width: 24
                 sourceSize.height: 24
                 fillMode: Image.PreserveAspectFit
-                source: "qrc:/resources/icons/info.svg"
+                source: `qrc:/resources/icons/${type}.svg`
             }
 
             Label{
@@ -81,7 +87,7 @@ Item{
                 height: 4
                 radius: 2
                 anchors.bottom: parent.bottom
-                color: "#3498db"
+                color: privateProperty.accent
             }
         }
     }

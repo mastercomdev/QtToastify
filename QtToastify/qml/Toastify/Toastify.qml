@@ -28,10 +28,11 @@ Item {
                 throw new Error("Invalid message")
             }
 
-            const { clickAction } = options;
+            const { type, clickAction } = options;
             var component = Qt.createComponent("qrc:/qml/Toastify/ToastifyDelegate.qml")
             var messageContainer = component.createObject(mainColumn, {
                                                               message,
+                                                              type,
                                                               clickAction
                                                           });
             return messageContainer;

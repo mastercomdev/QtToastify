@@ -25,10 +25,20 @@ ApplicationWindow {
             font.pointSize: 24
         }
 
+        Label{
+            text: "Message:"
+            font.weight: Font.DemiBold
+        }
+
         TextField{
             id: messageTextfield
             Layout.fillWidth: true
             text: "Simple message example"
+        }
+
+        Label{
+            text: "Type:"
+            font.weight: Font.DemiBold
         }
 
         ButtonGroup{
@@ -77,6 +87,11 @@ ApplicationWindow {
             }
         }
 
+        Label{
+            text: "Actions:"
+            font.weight: Font.DemiBold
+        }
+
         Button{
             text: "🚀 Show Toast"
             highlighted: true
@@ -114,5 +129,6 @@ ApplicationWindow {
     //Toast display module
     Toastify{
         id: toastify
+        position: topLeft
     }
 }

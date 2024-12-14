@@ -15,6 +15,7 @@ Item{
     property string message: ""
     property string type: "success"
     property int position: Qt.TopLeftCorner
+    property string theme: "Light"
 
     QtObject{
         id: privateProperty
@@ -39,7 +40,10 @@ Item{
         y: 12
         width: parent.width
         height: parent.height-12
-        color: "white"
+        color: theme==="Light" ? "#ffffff" :
+               theme==="Dark"  ? "#121212" :
+               theme==="Color" ?  privateProperty.accent   :
+                                 "white"
         radius: 6
         layer.enabled: true
         layer.effect: DropShadow{
@@ -63,7 +67,7 @@ Item{
                 sourceSize.width: 24
                 sourceSize.height: 24
                 fillMode: Image.PreserveAspectFit
-                source: `qrc:/resources/icons/${type}.svg`
+                source: `qrc:/resources/icons/${type}${theme==="Light" ? "":"-white"}.svg`
             }
 
             Label{
@@ -72,7 +76,11 @@ Item{
                 Layout.rightMargin: 12
                 wrapMode: "WordWrap"
                 horizontalAlignment: "AlignLeft"
+                font.weight: theme==="Light" ? Font.Normal : Font.Medium
                 text: message
+                color: theme==="Light" ? "#000000" :
+                       theme==="Dark"  ? "#ffffff" :
+                                         "white"
             }
         }
         Rectangle{
@@ -81,14 +89,14 @@ Item{
             height: 4
             radius: 2
             anchors.bottom: parent.bottom
-            color: "lightgrey"
+            color: "transparent"
 
             Rectangle{
                 width: parent.width*(1-privateProperty.progress)
                 height: 4
                 radius: 2
                 anchors.bottom: parent.bottom
-                color: privateProperty.accent
+                color: theme==="Light" ? privateProperty.accent : "#f5f5f5"
             }
         }
     }

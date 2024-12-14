@@ -16,6 +16,7 @@ ApplicationWindow {
     //Properties
     property string selectedType: "info"
     property int selectedPosition: Qt.TopLeftCorner
+    property string selectedTheme: "Light"
 
     Flickable{
         id: flickable
@@ -146,6 +147,44 @@ ApplicationWindow {
             }
 
             Label{
+                text: "Theme:"
+                font.weight: Font.DemiBold
+            }
+
+            ButtonGroup{
+                id: themeGroup
+            }
+            Flow{
+                RadioButton {
+                    text: "Light"
+                    ButtonGroup.group: themeGroup
+                    checked: selectedTheme==="Light"
+
+                    onClicked: {
+                        selectedTheme= "Light"
+                    }
+                }
+                RadioButton {
+                    text: "Dark"
+                    ButtonGroup.group: themeGroup
+                    checked: selectedTheme==="Dark"
+
+                    onClicked: {
+                        selectedTheme= "Dark"
+                    }
+                }
+                RadioButton {
+                    text: "Color"
+                    ButtonGroup.group: themeGroup
+                    checked: selectedTheme==="Color"
+
+                    onClicked: {
+                        selectedTheme= "Color"
+                    }
+                }
+            }
+
+            Label{
                 text: "Actions:"
                 font.weight: Font.DemiBold
             }
@@ -156,7 +195,12 @@ ApplicationWindow {
                 Material.accent: Material.Indigo
 
                 onClicked: {
-                    toastify.createMessage(messageTextfield.text, {type: selectedType, position: selectedPosition})
+                    const options = {
+                        type: selectedType,
+                        position: selectedPosition,
+                        theme: selectedTheme
+                    }
+                    toastify.createMessage(messageTextfield.text, options)
                 }
             }
 

@@ -49,12 +49,13 @@ Item {
                 throw new Error("Invalid message")
             }
 
-            const { type, position, clickAction } = options;
+            const { type, position, theme, clickAction } = options;
             var component = Qt.createComponent("qrc:/qml/Toastify/ToastifyDelegate.qml")
             var messageContainer = component.createObject(determinePosition(position), {
                                                               message,
-                                                              position,
                                                               type,
+                                                              position,
+                                                              theme,
                                                               clickAction
                                                           });
             return messageContainer;

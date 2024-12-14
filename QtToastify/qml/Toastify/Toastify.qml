@@ -49,7 +49,7 @@ Item {
                 throw new Error("Invalid message")
             }
 
-            const { type, position, theme, closeOnClick, clickAction } = options;
+            const { type, position, theme, closeOnClick, autoClose, hideProgressBar, clickAction } = options;
             var component = Qt.createComponent("qrc:/qml/Toastify/ToastifyDelegate.qml")
             var messageContainer = component.createObject(determinePosition(position), {
                                                               message,
@@ -57,6 +57,8 @@ Item {
                                                               position,
                                                               theme,
                                                               closeOnClick,
+                                                              autoClose,
+                                                              hideProgressBar,
                                                               clickAction
                                                           });
             return messageContainer;

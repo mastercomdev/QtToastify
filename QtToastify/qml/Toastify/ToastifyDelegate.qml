@@ -16,8 +16,9 @@ Item{
     property string type: "success" //info, success, warning, error
     property int position: Qt.TopLeftCorner //Qt.*****Corner
     property string theme: "Light" //Light, Dark, Color
-    property int autoClose: 0 //0 means no auto close
+    property int autoClose: 5000 //0 means no auto close
     property bool closeOnClick: true
+    property bool hideProgressBar: false
 
     QtObject{
         id: privateProperty
@@ -87,7 +88,7 @@ Item{
         }
         Rectangle{
             id: progressbar
-            visible: autoClose
+            visible: autoClose && !hideProgressBar
             width: parent.width
             height: 4
             radius: 2

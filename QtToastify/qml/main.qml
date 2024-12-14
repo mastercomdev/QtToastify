@@ -18,6 +18,8 @@ ApplicationWindow {
     property int selectedPosition: Qt.TopLeftCorner
     property string selectedTheme: "Light"
     property bool selectedCloseOnClick: true
+    property int selectedAutoClose: 5000
+    property bool selectedHideProgressBar: false
 
     Flickable{
         id: flickable
@@ -190,13 +192,48 @@ ApplicationWindow {
                 font.weight: Font.DemiBold
             }
 
-            Flow{
+            ColumnLayout{
                 CheckBox{
                     text: "closeOnClick"
                     checked: selectedCloseOnClick
 
                     onCheckedChanged: {
                         selectedCloseOnClick= checked
+                    }
+                }
+
+                CheckBox{
+                    text: "Hide Progress bar"
+                    checked: selectedHideProgressBar
+
+                    onCheckedChanged: {
+                        selectedHideProgressBar= checked
+                    }
+                }
+
+                RowLayout{
+                    Label{
+                        text: "Auto Close (ms):"
+                    }
+                    TextField{
+                        text: selectedAutoClose
+                        horizontalAlignment: "AlignHCenter"
+                        selectByMouse: true
+                        validator: IntValidator{
+                            bottom: 0
+                        }
+
+                        onTextChanged: {
+                            if(!text){
+                                text= 0
+                                return
+                            }
+
+                            selectedAutoClose= text
+                        }
+                    }
+                    Label{
+                        text: "(0 = No Auto Close)"
                     }
                 }
             }
@@ -217,6 +254,8 @@ ApplicationWindow {
                         type: selectedType,
                         position: selectedPosition,
                         theme: selectedTheme,
+                        autoClose: selectedAutoClose,
+                        hideProgressBar: selectedHideProgressBar,
                         closeOnClick: selectedCloseOnClick
                     }
                     toastify.createMessage(messageTextfield.text, options)

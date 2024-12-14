@@ -22,5 +22,9 @@
         <file>resources/icons/error.svg</file>
         <file>resources/icons/success.svg</file>
         <file>resources/icons/warning.svg</file>
+        <file>resources/icons/error-white.svg</file>
+        <file>resources/icons/info-white.svg</file>
+        <file>resources/icons/success-white.svg</file>
+        <file>resources/icons/warning-white.svg</file>
     </qresource>
 </RCC>

@@ -74,6 +74,8 @@ Item {
             return bottomLeftColumn;
         case Qt.BottomRightCorner:
             return bottomRightColumn;
+        case undefined:
+            return topLeftColumn;
         default:
             console.log("Invalid position")
         }

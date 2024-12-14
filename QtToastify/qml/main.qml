@@ -17,155 +17,175 @@ ApplicationWindow {
     property string selectedType: "info"
     property int selectedPosition: Qt.TopLeftCorner
 
-    ColumnLayout{
+    Flickable{
+        id: flickable
         anchors.centerIn: parent
-        spacing: 12
+        width: parent.width
+        height: parent.height
+        contentWidth: width
+        contentHeight: mainColumn.height
 
-        Label{
-            text: "Welcome to QtToastify"
-            font.pointSize: 24
-        }
+        ColumnLayout{
+            id: mainColumn
+            x: parent.width/2-width/2
+            spacing: 12
 
-        Label{
-            text: "Message:"
-            font.weight: Font.DemiBold
-        }
+            Item{
+                Layout.fillWidth: true
+                Layout.preferredHeight: 48
+            }
 
-        TextField{
-            id: messageTextfield
-            Layout.fillWidth: true
-            text: "Simple message example"
-        }
+            Label{
+                text: "Welcome to QtToastify"
+                font.pointSize: 24
+            }
 
-        Label{
-            text: "Type:"
-            font.weight: Font.DemiBold
-        }
+            Label{
+                text: "Message:"
+                font.weight: Font.DemiBold
+            }
 
-        ButtonGroup{
-            id: toastTypeGroup
-        }
-        Flow{
-            RadioButton {
-                text: "info"
-                ButtonGroup.group: toastTypeGroup
-                checked: selectedType==="info"
+            TextField{
+                id: messageTextfield
+                Layout.fillWidth: true
+                text: "Simple message example"
+            }
+
+            Label{
+                text: "Type:"
+                font.weight: Font.DemiBold
+            }
+
+            ButtonGroup{
+                id: toastTypeGroup
+            }
+            Flow{
+                RadioButton {
+                    text: "info"
+                    ButtonGroup.group: toastTypeGroup
+                    checked: selectedType==="info"
+
+                    onClicked: {
+                        selectedType= "info"
+                    }
+                }
+                RadioButton {
+                    text: "success"
+                    ButtonGroup.group: toastTypeGroup
+                    checked: selectedType==="success"
+
+                    onClicked: {
+                        selectedType= "success"
+                    }
+                }
+                RadioButton {
+                    text: "warning"
+                    ButtonGroup.group: toastTypeGroup
+                    checked: selectedType==="warning"
+
+                    onClicked: {
+                        selectedType= "warning"
+                    }
+                }
+                RadioButton {
+                    text: "error"
+                    ButtonGroup.group: toastTypeGroup
+                    checked: selectedType==="error"
+
+                    onClicked: {
+                        selectedType= "error"
+                    }
+                }
+            }
+
+            Label{
+                text: "Position:"
+                font.weight: Font.DemiBold
+            }
+
+            ButtonGroup{
+                id: toastPositionGroup
+            }
+            Flow{
+                RadioButton {
+                    text: "Top-Left"
+                    ButtonGroup.group: toastPositionGroup
+                    checked: selectedPosition===Qt.TopLeftCorner
+
+                    onClicked: {
+                        selectedPosition= Qt.TopLeftCorner
+                    }
+                }
+                RadioButton {
+                    text: "Top-Right"
+                    ButtonGroup.group: toastPositionGroup
+                    checked: selectedPosition===Qt.TopRightCorner
+
+                    onClicked: {
+                        selectedPosition= Qt.TopRightCorner
+                    }
+                }
+                RadioButton {
+                    text: "Bottom-Left"
+                    ButtonGroup.group: toastPositionGroup
+                    checked: selectedPosition===Qt.BottomLeftCorner
+
+                    onClicked: {
+                        selectedPosition= Qt.BottomLeftCorner
+                    }
+                }
+                RadioButton {
+                    text: "Bottom-Right"
+                    ButtonGroup.group: toastPositionGroup
+                    checked: selectedPosition===Qt.BottomRightCorner
+
+                    onClicked: {
+                        selectedPosition= Qt.BottomRightCorner
+                    }
+                }
+            }
+
+            Label{
+                text: "Actions:"
+                font.weight: Font.DemiBold
+            }
+
+            Button{
+                text: "🚀 Show Toast"
+                highlighted: true
+                Material.accent: Material.Indigo
 
                 onClicked: {
-                    selectedType= "info"
+                    toastify.createMessage(messageTextfield.text, {type: selectedType, position: selectedPosition})
                 }
             }
-            RadioButton {
-                text: "success"
-                ButtonGroup.group: toastTypeGroup
-                checked: selectedType==="success"
+
+            ToolSeparator{
+                orientation: Qt.Horizontal
+                Layout.fillWidth: true
+            }
+
+            Button{
+                text: "Custom click action"
+                highlighted: true
 
                 onClicked: {
-                    selectedType= "success"
+                    //With Click Action
+                    const customAction= function(messageContainer){
+                        console.log("Custom action!")
+                        messageContainer.close()
+                    }
+                    const options = {
+                        clickAction: customAction
+                    }
+
+                    toastify.createMessage("Custom click action message!", options)
                 }
             }
-            RadioButton {
-                text: "warning"
-                ButtonGroup.group: toastTypeGroup
-                checked: selectedType==="warning"
 
-                onClicked: {
-                    selectedType= "warning"
-                }
-            }
-            RadioButton {
-                text: "error"
-                ButtonGroup.group: toastTypeGroup
-                checked: selectedType==="error"
-
-                onClicked: {
-                    selectedType= "error"
-                }
-            }
-        }
-
-        Label{
-            text: "Position:"
-            font.weight: Font.DemiBold
-        }
-
-        ButtonGroup{
-            id: toastPositionGroup
-        }
-        Flow{
-            RadioButton {
-                text: "Top-Left"
-                ButtonGroup.group: toastPositionGroup
-                checked: selectedPosition===Qt.TopLeftCorner
-
-                onClicked: {
-                    selectedPosition= Qt.TopLeftCorner
-                }
-            }
-            RadioButton {
-                text: "Top-Right"
-                ButtonGroup.group: toastPositionGroup
-                checked: selectedPosition===Qt.TopRightCorner
-
-                onClicked: {
-                    selectedPosition= Qt.TopRightCorner
-                }
-            }
-            RadioButton {
-                text: "Bottom-Left"
-                ButtonGroup.group: toastPositionGroup
-                checked: selectedPosition===Qt.BottomLeftCorner
-
-                onClicked: {
-                    selectedPosition= Qt.BottomLeftCorner
-                }
-            }
-            RadioButton {
-                text: "Bottom-Right"
-                ButtonGroup.group: toastPositionGroup
-                checked: selectedPosition===Qt.BottomRightCorner
-
-                onClicked: {
-                    selectedPosition= Qt.BottomRightCorner
-                }
-            }
-        }
-
-        Label{
-            text: "Actions:"
-            font.weight: Font.DemiBold
-        }
-
-        Button{
-            text: "🚀 Show Toast"
-            highlighted: true
-            Material.accent: Material.Indigo
-
-            onClicked: {
-                toastify.createMessage(messageTextfield.text, {type: selectedType, position: selectedPosition})
-            }
-        }
-
-        ToolSeparator{
-            orientation: Qt.Horizontal
-            Layout.fillWidth: true
-        }
-
-        Button{
-            text: "Custom click action"
-            highlighted: true
-
-            onClicked: {
-                //With Click Action
-                const customAction= function(messageContainer){
-                    console.log("Custom action!")
-                    messageContainer.close()
-                }
-                const options = {
-                    clickAction: customAction
-                }
-
-                toastify.createMessage("Custom click action message!", options)
+            Item{
+                Layout.fillWidth: true
+                Layout.preferredHeight: 48
             }
         }
     }

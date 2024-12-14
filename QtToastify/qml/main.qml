@@ -12,6 +12,7 @@ ApplicationWindow {
     title: qsTr("Toastify")
     font.family: "Montserrat"
     Material.accent: "#3498db"
+    Material.theme: Material.Light
 
     //Properties
     property string selectedType: "info"
@@ -21,6 +22,7 @@ ApplicationWindow {
     property int selectedAutoClose: 5000
     property bool selectedHideProgressBar: false
 
+    //Dynamic content loader
     Loader{
         anchors.fill: parent
         source: "qrc:/qml/ShowcaseSimple.qml"
@@ -29,5 +31,18 @@ ApplicationWindow {
     //Toast display module
     Toastify{
         id: toastify
+    }
+
+    ToolButton{
+        text: window.Material.theme===Material.Light ? "☀" : "☾"
+        Material.foreground: window.Material.theme===Material.Light ? "black" : "white"
+
+        onClicked: {
+            if(window.Material.theme===Material.Light){
+                window.Material.theme= Material.Dark
+            }else{
+                window.Material.theme= Material.Light
+            }
+        }
     }
 }

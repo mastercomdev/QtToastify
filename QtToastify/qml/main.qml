@@ -17,6 +17,7 @@ ApplicationWindow {
     property string selectedType: "info"
     property int selectedPosition: Qt.TopLeftCorner
     property string selectedTheme: "Light"
+    property bool selectedCloseOnClick: true
 
     Flickable{
         id: flickable
@@ -185,6 +186,23 @@ ApplicationWindow {
             }
 
             Label{
+                text: "Other:"
+                font.weight: Font.DemiBold
+            }
+
+            Flow{
+                CheckBox{
+                    text: "closeOnClick"
+                    checked: selectedCloseOnClick
+
+                    onCheckedChanged: {
+                        selectedCloseOnClick= checked
+                    }
+                }
+            }
+
+
+            Label{
                 text: "Actions:"
                 font.weight: Font.DemiBold
             }
@@ -198,7 +216,8 @@ ApplicationWindow {
                     const options = {
                         type: selectedType,
                         position: selectedPosition,
-                        theme: selectedTheme
+                        theme: selectedTheme,
+                        closeOnClick: selectedCloseOnClick
                     }
                     toastify.createMessage(messageTextfield.text, options)
                 }

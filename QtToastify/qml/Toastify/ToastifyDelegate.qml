@@ -13,9 +13,11 @@ Item{
     property int borderMargin: 12
     property var clickAction
     property string message: ""
-    property string type: "success"
-    property int position: Qt.TopLeftCorner
-    property string theme: "Light"
+    property string type: "success" //info, success, warning, error
+    property int position: Qt.TopLeftCorner //Qt.*****Corner
+    property string theme: "Light" //Light, Dark, Color
+    property int autoClose: 0 //0 means no auto close
+    property bool closeOnClick: true
 
     QtObject{
         id: privateProperty
@@ -85,6 +87,7 @@ Item{
         }
         Rectangle{
             id: progressbar
+            visible: autoClose
             width: parent.width
             height: 4
             radius: 2
@@ -96,13 +99,14 @@ Item{
                 height: 4
                 radius: 2
                 anchors.bottom: parent.bottom
-                color: theme==="Light" ? privateProperty.accent : "#f5f5f5"
+                color: theme==="Light" ? privateProperty.accent : "#9Cf5f5f5"
             }
         }
     }
 
     MouseArea{
         anchors.fill: parent
+        enabled: closeOnClick
 
         onClicked: {
             try{
@@ -136,10 +140,16 @@ Item{
             target: privateProperty
             property: "progress"
             to: 1
-            duration: 5000
+            duration: autoClose
         }
         ScriptAction{
-            script: exitAnimation.start()
+            script: {
+                if(autoClose)
+                    exitAnimation.start()
+                else{
+                    //We will do nothing, use 'closeOnClick' or 'customAction' to handle click actions
+                }
+            }
         }
     }
 

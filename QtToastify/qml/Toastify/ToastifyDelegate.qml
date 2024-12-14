@@ -13,7 +13,7 @@ Item{
     property int borderMargin: 12
     property var clickAction
     property string message: ""
-    property string type: "success" //info, success, warning, error
+    property string type: "info" //info, success, warning, error
     property int position: Qt.TopLeftCorner //Qt.*****Corner
     property string theme: "Light" //Light, Dark, Color
     property int autoClose: 5000 //0 means no auto close

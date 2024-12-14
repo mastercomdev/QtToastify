@@ -4,5 +4,7 @@
         <file>qml/Toastify/Toastify.qml</file>
         <file>qml/Toastify/ToastifyDelegate.qml</file>
         <file>qml/Toastify/README.md</file>
+        <file>qml/ShowcaseAdvanced.qml</file>
+        <file>qml/ShowcaseSimple.qml</file>
     </qresource>
 </RCC>

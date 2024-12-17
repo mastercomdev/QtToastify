@@ -7,10 +7,10 @@ A **QML-based Toast Notification Library** inspired by the popular [Toastify.js]
 ## Example Screenshots 🖼️
 
 ### Light Theme (Success)
-![Light Theme](path_to_your_screenshot_1.png)
+![Light Theme](Preview/Light.gif)
 
 ### Dark Theme (Error)
-![Dark Theme](path_to_your_screenshot_2.png)
+![Dark Theme](Preview/Dark.png)
 
 ---
 

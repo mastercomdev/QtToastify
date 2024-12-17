@@ -6,10 +6,10 @@ A **QML-based Toast Notification Library** inspired by the popular [Toastify.js]
 
 ## Preview 🖼️
 
-### Light Theme (Success)
+### Light Theme (Simple view)
 ![Light Theme](Preview/Light.gif)
 
-### Dark Theme (Error)
+### Dark Theme (Advanced view)
 ![Dark Theme](Preview/Dark.jpg)
 
 ---

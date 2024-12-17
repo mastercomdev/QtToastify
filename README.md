@@ -4,13 +4,13 @@ A **QML-based Toast Notification Library** inspired by the popular [Toastify.js]
 
 ---
 
-## Example Screenshots 🖼️
+## Preview 🖼️
 
 ### Light Theme (Success)
 ![Light Theme](Preview/Light.gif)
 
 ### Dark Theme (Error)
-![Dark Theme](Preview/Dark.png)
+![Dark Theme](Preview/Dark.jpg)
 
 ---
 

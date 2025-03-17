@@ -24,7 +24,7 @@ Item{
         id: privateProperty
 
         property real progress: 0
-        property real startPosX: position===Qt.TopLeftCorner ? -mainRect.width-borderMargin : position===Qt.TopRightCorner ? mainRect.width+12 : position===Qt.BottomLeftCorner? -mainRect.width-borderMargin : position===Qt.BottomRightCorner ? mainRect.width+12 : -1
+        property real startPosX: position===Qt.TopLeftCorner ? -mainRect.width-borderMargin : position===Qt.TopEdge ? mainRect.width/2-width/2 : position===Qt.TopRightCorner ? mainRect.width+12 : position===Qt.BottomLeftCorner? -mainRect.width-borderMargin : position===Qt.BottomEdge ? mainRect.width/2-width/2 : position===Qt.BottomRightCorner ? mainRect.width+12 : -1
         property real endPosX: 0
         property color accent: type==="info" ?    "#3498db" :
                                type==="success" ? "#07bc0c" :

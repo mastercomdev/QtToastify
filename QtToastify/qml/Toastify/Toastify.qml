@@ -16,6 +16,15 @@ Item {
         spacing: 0
     }
 
+    //Top-Center
+    ColumnLayout{
+        id: topCenterColumn
+        x: width / 2
+        y: toprow.y + toprow.height + 1 * g_item_spacing
+        width: root.width / 2
+        spacing: 0
+    }
+
     //Top-Right
     ColumnLayout{
         id: topRightColumn
@@ -31,6 +40,15 @@ Item {
         x: 12
         y: root.height-height-12
         width: 300
+        spacing: 0
+    }
+
+    //Bottom-Center
+    ColumnLayout{
+        id: bottomCenterColumn
+        x: width / 2
+        y: root.height-height-12
+        width: root.width / 2
         spacing: 0
     }
 
@@ -72,10 +90,14 @@ Item {
         switch(position){
         case Qt.TopLeftCorner:
             return topLeftColumn;
+        case Qt.TopEdge:
+            return topCenterColumn;
         case Qt.TopRightCorner:
             return topRightColumn;
         case Qt.BottomLeftCorner:
             return bottomLeftColumn;
+        case Qt.BottomEdge:
+            return bottomCenterColumn;
         case Qt.BottomRightCorner:
             return bottomRightColumn;
         case undefined:

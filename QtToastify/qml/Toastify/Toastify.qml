@@ -20,7 +20,7 @@ Item {
     ColumnLayout{
         id: topCenterColumn
         x: width / 2
-        y: toprow.y + toprow.height + 1 * g_item_spacing
+        y: toprow.y + toprow.height + 1
         width: root.width / 2
         spacing: 0
     }
